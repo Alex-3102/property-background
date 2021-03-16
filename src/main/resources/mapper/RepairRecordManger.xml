@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.IRepairRecordDao">
+    <insert id="insert" parameterType="com.example.demo.entity.RepairRecord">
+		insert into repair_record (user_id, contact_person,date,details,status,phone_number,address) values (#{userId}, #{record.contactPerson},#{record.date},#{record.details},2,#{record.phoneNumber},#{record.address})
+	</insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+		delete from repair_record where id=#{id}
+	</delete>
+
+    <update id="update" parameterType="com.example.demo.entity.RepairRecord">
+		update repair_record set contact_person=#{contactPerson},date=#{date},details=#{details},status=#{status},phone_number=#{phoneNumber},address=#{address} where id=#{id}
+	</update>
+
+    <select id="query" resultMap="RepairRecordModel" parameterType="java.lang.Integer">
+        select <include refid="sqlBase" /> from repair_record where id = #{id}
+    </select>
+
+    <select id="selectAllByID" resultMap="RepairRecordModel">
+        select a.id,contact_person,date,details,status,a.phone_number,address from repair_record a join user b on a.user_id = b.id where a.user_id = #{userId}
+    </select>
+
+    <sql id="sqlBase">
+		id,contact_person,date,details,status,phone_number,address
+	</sql>
+
+    <resultMap id="RepairRecordModel" type="com.example.demo.entity.RepairRecord">
+        <id column="id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id" />
+        <result column="contact_person" javaType="java.lang.String" jdbcType="VARCHAR" property="contactPerson" />
+        <result column="date" javaType="java.sql.Date" jdbcType="DATE" property="date" />
+        <result column="details" javaType="java.lang.String" jdbcType="VARCHAR" property="details" />
+        <result column="status" javaType="java.lang.Integer" jdbcType="INTEGER" property="status" />
+        <result column="phone_number" javaType="java.lang.String" jdbcType="VARCHAR" property="phoneNumber" />
+        <result column="address" javaType="java.lang.String" jdbcType="VARCHAR" property="address" />
+    </resultMap>
+</mapper>

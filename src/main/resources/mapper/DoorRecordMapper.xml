@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.IDoorRecordDao">
+
+    <insert id="insert" parameterType="com.example.demo.entity.DoorRecord">
+        insert into door_record(date, user_id, name, sex, num, id_card) values (#{record.date}, #{userId}, #{record.name}, #{record.sex}, #{record.num}, #{record.idCard});
+    </insert>
+
+    <select id="queryRecords" resultMap="DoorRecordModel" parameterType="java.lang.Integer">
+        select a.date, a.name, a.sex, a.num, a.id_card from door_record a join user b on a.user_id = b.id  Where a.user_id = #{userId};
+    </select>
+
+    <resultMap id="DoorRecordModel" type="com.example.demo.entity.DoorRecord">
+        <result column="date" javaType="java.sql.Date" jdbcType="DATE" property="date"/>
+        <result column="name" javaType="java.lang.String" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" javaType="java.lang.String" jdbcType="VARCHAR" property="sex"/>
+        <result column="num" javaType="java.lang.String" jdbcType="VARCHAR" property="num"/>
+        <result column="id_card" javaType="java.lang.String" jdbcType="VARCHAR" property="idCard"/>
+    </resultMap>
+<!--    private Date date;-->
+<!--    private String name;-->
+<!--    private String sex;-->
+<!--    private String num;-->
+<!--    private String idCard;-->
+</mapper>

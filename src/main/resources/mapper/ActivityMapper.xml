@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.IActivityDao">
+
+    <select id="getList" resultMap="ActivityModel" parameterType="java.lang.Integer">
+        select * from activity where `type` = #{type}
+    </select>
+
+    <insert id="insert" parameterType="com.example.demo.entity.Activity">
+        insert into activity(`title`, `address`, `location`, `business_hours`, `people_number`, `attention`, `image_path`, `type`) values (#{activity.title}, #{activity.address}, #{activity.location}, #{activity.businessHours}, #{activity.peopleNumber}, #{activity.attention}, #{activity.imagePath}, #{type})
+    </insert>
+
+    <resultMap id="ActivityModel" type="com.example.demo.entity.Activity">
+        <id column="id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id"/>
+        <result column="title" javaType="java.lang.String" jdbcType="VARCHAR" property="title"/>
+        <result column="address" javaType="java.lang.String" jdbcType="VARCHAR" property="address"/>
+        <result column="location" javaType="java.lang.String" jdbcType="VARCHAR" property="location"/>
+        <result column="business_hours" javaType="java.lang.String" jdbcType="VARCHAR" property="businessHours"/>
+        <result column="people_number" javaType="java.lang.String" jdbcType="VARCHAR" property="peopleNumber"/>
+        <result column="attention" javaType="java.lang.String" jdbcType="VARCHAR" property="attention"/>
+        <result column="image_path" javaType="java.lang.String" jdbcType="VARCHAR" property="imagePath"/>
+    </resultMap>
+</mapper>

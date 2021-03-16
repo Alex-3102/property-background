@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.IPaymentDao">
+    <select id="queryBills" resultMap="PaymentRecordModel" parameterType="java.lang.Integer">
+        select a.id, price, a.date, type from PaymentRecord a join user b on a.user_id = b.id  Where a.user_id = #{user_id};
+    </select>
+    <resultMap id="PaymentRecordModel" type="com.example.demo.entity.Bill">
+        <id column="id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id" />
+        <result column="price" javaType="java.lang.Integer" jdbcType="INTEGER" property="price"/>
+        <result column="date" javaType="java.sql.Date" jdbcType="INTEGER" property="date"/>
+        <result column="type" javaType="java.lang.Integer" jdbcType="INTEGER" property="type"/>
+    </resultMap>
+</mapper>
