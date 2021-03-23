@@ -1,8 +1,9 @@
 package com.example.demo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Notice {
+public class Notice implements Serializable {
 
     private int id;
     private String title;
